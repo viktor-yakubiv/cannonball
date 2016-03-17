@@ -11,13 +11,17 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-var light = new THREE.PointLight( 0xffffff, 10, 0 );
+var light = new THREE.PointLight( 0xdddddd, 10, 0 );
 light.position.set( -10, 10, 10 );
 scene.add( light );
 
 //Setup ground
 var geometry = new THREE.PlaneGeometry( 200, 100, 1 );
-var material = new THREE.MeshLambertMaterial( {color: 0x00ff00, side: THREE.DoubleSide} );
+var texture = new THREE.TextureLoader().load( "img/grass-texture.jpg" );
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set( 4, 4 );
+var material = new THREE.MeshLambertMaterial( {map: texture, side: THREE.DoubleSide} );
 var plane = new THREE.Mesh( geometry, material );
 plane.rotation.x=-Math.PI/2;
 plane.position.x=70;
